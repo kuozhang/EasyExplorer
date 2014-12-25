@@ -4,7 +4,7 @@ Bundle-Name: EasyExplorer
 Bundle-SymbolicName: EasyExplorer; singleton:=true
 Bundle-Version: 1.0.0
 Bundle-Activator: easyexplorer.Activator
-Bundle-Vendor: Tim
+Bundle-Vendor: Tim,Kuo
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.core.resources,
