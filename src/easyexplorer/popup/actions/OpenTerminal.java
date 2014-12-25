@@ -2,6 +2,7 @@ package easyexplorer.popup.actions;
 
 import java.io.IOException;
 
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -11,7 +12,13 @@ import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 
-public class OpenCMD implements IObjectActionDelegate {
+/**
+ * Open terminals for different os
+ * Linux : terminal
+ * Windows : cmd
+ * Mac : // TODO
+ */
+public class OpenTerminal implements IObjectActionDelegate {
 
 	private Shell shell;
 	private String file_Path;
@@ -19,7 +26,7 @@ public class OpenCMD implements IObjectActionDelegate {
 	/**
 	 * Constructor for Action1.
 	 */
-	public OpenCMD() {
+	public OpenTerminal() {
 		super();
 	}
 
@@ -41,8 +48,14 @@ public class OpenCMD implements IObjectActionDelegate {
 					return;
 				}
 				try {
-					Runtime rt = Runtime.getRuntime();
-					Process p = rt.exec("cmd /c start cd "+file_Path);
+				    final String osName = Platform.getOS();
+				    Runtime rt = Runtime.getRuntime();
+				    if (osName.contains("win")) {
+				        rt.exec("cmd /c start cd "+file_Path);
+				    }
+				    else if (osName.contains( "linux" )) {
+				        rt.exec("cd "+file_Path);
+				    }
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

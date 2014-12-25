@@ -3,6 +3,8 @@ package easyexplorer.popup.actions;
 
 import java.io.IOException;
 
+import org.eclipse.core.internal.resources.OS;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -38,8 +40,21 @@ public class OpenExplorer implements IObjectActionDelegate {
 			if(file_Path == null){
 				return;
 			}
+
             Runtime rt = Runtime.getRuntime();
-            rt.exec("cmd /c start "+"file:///"+ PathUtil.handleSpace(file_Path));
+            String osName = Platform.getOS();
+            if (osName.contains("win")) { // OS Windows
+                rt.exec("cmd /c start "+"file:///"+ PathUtil.handleSpace(file_Path));
+            }
+            else if (osName.contains("ubuntu")) { // OS: Ubuntu
+                rt.exec("xdg-open "+"file:///"+ PathUtil.handleSpace(file_Path));
+            }
+            else if (osName.contains("mac")) { // OS: Ubuntu
+                rt.exec("open "+"file:///"+ PathUtil.handleSpace(file_Path));
+            }
+            // TODO other distributions of linux
+
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
