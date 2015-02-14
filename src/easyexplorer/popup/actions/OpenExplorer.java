@@ -32,6 +32,8 @@ public class OpenExplorer implements IObjectActionDelegate {
 
 	/**
 	 * @see IActionDelegate#run(IAction)
+	 * 
+	 * Eclipse Luna has the ability now, @see org.eclipse.ui.internal.ide.handlers.ShownInSystemExplorerhandler#execute(ExecutionEvent)
 	 */
 	public void run(IAction action) {
 		try {
